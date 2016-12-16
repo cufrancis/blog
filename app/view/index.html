@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+  </meta>
+
+  <body>
+      {% block body %}
+
+    <div id="hello-world-app">
+      <h1>${msg}</h1>
+    </div>
+
+    {{ user['username'] }}
+    {% end %}
+  </body>
+
+
+  {% block script %}
+
+      <script
+        src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js">
+      </script>
+
+      <script>
+      Vue.config.delimiters = ['${', '}'];
+        new Vue({
+          el: "#hello-world-app",
+          data: {
+            msg: "Hello World!"
+          }
+        });
+      </script>
+
+  {% end %}
+</html>
