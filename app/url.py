@@ -10,6 +10,7 @@ sys.path.append("./")
 import app.controller.IndexHandler as Index
 import app.controller.UserHandler as User
 import app.controller.ArticleHandler as Article
+import app.controller.AdminHandler as Admin
 
 
 
@@ -21,4 +22,5 @@ url = [
     (r'/logout', User.logout),
 
     (r'/article/(.*)', Article.index),
+    (r'/admin', Admin.index)
 ]

@@ -4,19 +4,19 @@ sys.path.append("../../../")
 # print(sys.path)
 import tornado.web
 # from speedTornado.config import Config
-from speedTornado.Core.Controller import Controller
+# from speedTornado.Core.Controller import Controller
 from speedTornado.Core.Function import strToDict, stReplace
+
+from app.controller.BaseHandler import BaseController
 from app.model.User import User
 from app.model.Article import Article
 # import app.model.Article as Article
 from speedTornado.lib.baiduTranslate import baiduTranslate
 
-class index(Controller):
+class index(BaseController):
     def get(self):
         article_db = Article()
         articles = article_db.findAll()
-
-        print(articles)
 
         # 新增文章时使用，查询sulg
         # ss = baiduTranslate()

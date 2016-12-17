@@ -9,6 +9,7 @@ import importlib
 
 from speedTornado.config import Config
 from speedTornado.Drivers.database import *
+from speedTornado.lib.Debug import dump
 
 class Model(object):
 
@@ -41,6 +42,8 @@ class Model(object):
     # Done
     def find(self, conditions = {}, sort = '', fields = ''):
         result = self.findAll(conditions, sort, fields, '1')
+
+        dump("Model==find")
 
         # print(help(self._db._val_escape))
 
@@ -88,7 +91,7 @@ class Model(object):
 
         sql = "SELECT {fields} FROM {tbl_name} {where} {sort}".format(fields = fields, tbl_name = self.tbl_name, where = where,sort = sort)
 
-        # print(sql)
+        print(sql)
 
         if len(limit) != 0:
             sql = self._db.setlimit(sql, limit)

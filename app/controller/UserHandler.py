@@ -1,19 +1,22 @@
 import sys
 sys.path.append("../../../")
 
-# print(sys.path)
 import tornado.web
 import tornado.gen
 # from speedTornado.config import Config
-from speedTornado.Core.Controller import Controller
+# from speedTornado.Core.Controller import Controller
+import speedTornado.Core.Session as Session
+
+from app.controller.BaseHandler import BaseController
 from app.model.User import User
 
 import json
 
-
 # 用户登录
-class login(tornado.web.RequestHandler):
+class login(BaseController):
     def get(self):
+        # print(self.get_secure_cookie('username'))
+        # print(self.current_user)
         cookieName = self.get_secure_cookie('cookieName')
         self.render('user/login.html', cookieName=cookieName)
 
@@ -26,15 +29,18 @@ class login(tornado.web.RequestHandler):
         user_db = User()
         result = user_db.find(dict(username=username, password=password))
         print(result)
-        if len(result) == 0:
+        if result == False:
             self.write("登录错误")
         else:
+            self.session['user'] = ''
             # self.set_secure_cookie('user', result)
             self.set_secure_cookie('username', username)
             self.set_secure_cookie('cookieName', username)
+            self.session['user'] = result
+            self.session.save()
             self.write("用户{user}登录成功！\n3秒后跳转到首页".format(user=result['username']))
 
-class register(Controller):
+class register(BaseController):
     def get(self):
         if self.get_secure_cookie('message'):
             message=self.get_secure_cookie('message')
@@ -62,7 +68,8 @@ class register(Controller):
             else:
                 self.write("Create Error..")
 
-class logout(Controller):
+class logout(BaseController):
     def get(self):
         self.clear_cookie('username')
+        self.session['user'] = ''
         self.success("Logout success", '/login')

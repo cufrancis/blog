@@ -6,6 +6,7 @@ from app.url import url
 import tornado.web
 import os
 # from handles.error import ErrorHandler
+#
 
 settings = dict(
     # 调试模式
@@ -37,7 +38,7 @@ settings = dict(
     # 开启XSRF防护
     xsrf_cookies = True,
     # 如果用户没有登录，authenticated 装饰器会重定向到此url
-    login_url = '/',
+    login_url = '/login',
 
 )
 
