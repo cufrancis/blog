@@ -23,21 +23,11 @@ class Controller(tornado.web.RequestHandler):
             print('View Engine: complie_dir is not writable')
         if os.access(Config['view']['config']['cache_dir'], os.W_OK) != True:
             print('View Engine: cache_dir is not writable')
-    #
-    #     print(help(self.v))
 
-    def dd(self):
-        pass
-        # self.render("index")
+    def get_current_user(self):
+        return self.get_secure_cookie("username")
 
-    # def display(self, tplname = '', **kwargs):
-    #     if len(tplname) == 0:
-    #         return False
-    #     else:
-    #         return self.v.render(tplname, **kwargs)
-
-    def display_string(self, chunk):
-        # print(help(self.v.write))
-        return self.write(chunk)
-        # print(self.write(chunk))
-        # print(self.v.write(chunk))
+    # 成功弹窗提示
+    def success(self, msg, url):
+        url = "window.history.back()" if len(url) == 0 else "location.href=\"{url}\";".format(url=url)
+        self.write('<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><script>function sptips(){alert(\"'+msg+'");'+url+'}</script></head><body onload=\"sptips()\"></body></html>')

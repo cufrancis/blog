@@ -5,10 +5,11 @@ sys.path.append('../../')
 from speedTornado.config import Config
 from speedTornado.Core.Model import Model
 
-class User(Model):
+class Article(Model):
 
-    # 表名
-    tbl_name = 'users'
+    tbl_name = 'articles'
+
+    pk = 'id'
 
 
     def __init__(self):

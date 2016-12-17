@@ -6,12 +6,16 @@ the url structure of website
 import sys
 sys.path.append("./")
 
-from app.controller import *
+# 路由分组
+from app.controller.IndexHandler import IndexController
+from app.controller.UserHandler import LoginController, RegisterController, LogoutController
 
-# from handles import *
 
 
 # 路由映射表
 url = [
     (r'/', IndexController),
+    (r'/login', LoginController),
+    (r'/register', RegisterController),
+    (r'/logout', LogoutController),
 ]

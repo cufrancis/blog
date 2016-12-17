@@ -48,16 +48,17 @@ class Model(object):
             # 这里返回的依然是字典，程序需要result[0]['username']才能获取数据
             # 未完成：
             # 以后可以将列表转换成字典，直接使用result['username']获取数据
-            return result
+            return result[0]
         else:
             return False
 
     # conditions 可以是字典或者字符串
     # Done
     def findAll(self, conditions = {}, sort = '', fields = '', limit = ''):
-        where = 'WHERE '
+        where = ''
         fields = "*" if len(fields) == 0 else fields
-        if (isinstance(conditions, dict)):
+        print(conditions)
+        if (isinstance(conditions, dict)) and len(conditions) != 0:
             join = []
             for k, v in conditions.items():
                 v = self.escape(v)
@@ -75,11 +76,11 @@ class Model(object):
                 # print(num)
             # print(tmp)
 
-            where = where + tmp
+            where = 'WHERE ' + tmp
             # print(where)
         else:
             if len(conditions) != 0:
-                where = where + conditions
+                where = conditions
         if len(sort) != 0:
             sort = "ORDER BY {sort}".format(sort=sort)
         else:
@@ -105,6 +106,7 @@ class Model(object):
         return self.escape(value)
 
     # 数据库增加，输入字典
+    # 返回新增id
     # Done
     def create(self, row = {}):
         # 不是字典，返回False

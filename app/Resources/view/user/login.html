@@ -1,0 +1,43 @@
+{% extends "../base.html" %}
+
+{% block content %}
+    <p id=message></p>
+    用{{cookieName}} 登录？
+
+    <form method="POST">
+        <label>用户名</label>
+        <input type="text" name="username" id="username" /><br />
+        <label>密码</label>
+        <input type="password" name="password" id="password" /><br />
+        <input type="button" value="Login" id="login">
+    </form>
+{% end %}
+
+{%block script%}
+    <script src='{{static_url("js/jquery.min.js")}}'></script>
+    <script src="{{ static_url('js/script.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            $('#login').click(function(){
+                var username = $('#username').val()
+                var password = $('#password').val()
+                var pd = {"username":username, "password":password, "_xsrf":getCookie("_xsrf")}
+
+                $.ajax({
+                    type:"post",
+                    url:"/login",
+                    data:pd,
+                    cache:false,
+                    success:function(data){
+                        $('#message').text(data)
+                        $('#message').show(1000)
+                        setTimeout("location.href='/'", 3000)
+                    },
+                    error:function(data){
+                            alert(data)
+                    },
+                });
+            });
+        });
+    </script>
+{%end%}

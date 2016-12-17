@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{# {%block title%}Index{%end%}#}
+
+{%block css%}
+    <link src='{{static_url("css/style.css")}}' >
+{%end%}
+
+{% block content %}
+    <h3>Article lists</h3>
+    {% if not current_user %}
+        <p><a href="/login" class="p-right">Login</a> | <a href="/register">Register</a></p>
+    {% else %}
+        Welcome : {{ current_user }}| <a href="/logout">Logout</a>
+    {%end%}
+    <hr />
+    <ul class=article-list>
+        {% for article in articles %}
+            <li>
+                <div class=article>
+                    <a href="">{{article['title']}}</a><br />
+                    <i>Created_at:{{article['created_at']}} | Author:{{article['author']}} | Visit:{{article['visit']}}</i>
+                </div>
+            </li>
+        {% end %}
+    <ul>
+{% end %}
+
+
+
+
+
+{% block script %}
+
+      <script
+        src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js">
+      </script>
+
+      <script>
+      Vue.config.delimiters = ['${', '}'];
+        new Vue({
+          el: "#hello-world-app",
+          data: {
+            msg: "Hello World!"
+          }
+        });
+      </script>
+
+{% end %}
