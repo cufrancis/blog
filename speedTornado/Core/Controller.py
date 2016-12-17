@@ -10,8 +10,6 @@ import tornado.web
 
 # 控制器父类，所有控制器都应继承此类
 class Controller(tornado.web.RequestHandler):
-        # super().__init__(self)
-        # print("Controller")
 
     # def initialize(self)
     def __init__(self, application, request, **kwargs):

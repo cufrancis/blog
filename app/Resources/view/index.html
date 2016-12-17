@@ -18,7 +18,7 @@
         {% for article in articles %}
             <li>
                 <div class=article>
-                    <a href="">{{article['title']}}</a><br />
+                    <a href="article/{{article['slug']}}">{{article['title']}}</a><br />
                     <i>Created_at:{{article['created_at']}} | Author:{{article['author']}} | Visit:{{article['visit']}}</i>
                 </div>
             </li>

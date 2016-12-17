@@ -34,4 +34,8 @@ Config = dict(
         ),
         engine_name = 'Tornado'
     ),
+    baiduTranslate = dict(
+        appid = '20151113000005349',
+        secretKey = 'osubCEzlGjzvw8qdQc41',
+    ),
 )

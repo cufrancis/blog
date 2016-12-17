@@ -7,15 +7,18 @@ import sys
 sys.path.append("./")
 
 # 路由分组
-from app.controller.IndexHandler import IndexController
-from app.controller.UserHandler import LoginController, RegisterController, LogoutController
+import app.controller.IndexHandler as Index
+import app.controller.UserHandler as User
+import app.controller.ArticleHandler as Article
 
 
 
 # 路由映射表
 url = [
-    (r'/', IndexController),
-    (r'/login', LoginController),
-    (r'/register', RegisterController),
-    (r'/logout', LogoutController),
+    (r'/', Index.index),
+    (r'/login', User.login),
+    (r'/register', User.register),
+    (r'/logout', User.logout),
+
+    (r'/article/(.*)', Article.index),
 ]

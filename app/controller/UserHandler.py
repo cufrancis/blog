@@ -12,7 +12,7 @@ import json
 
 
 # 用户登录
-class LoginController(tornado.web.RequestHandler):
+class login(tornado.web.RequestHandler):
     def get(self):
         cookieName = self.get_secure_cookie('cookieName')
         self.render('user/login.html', cookieName=cookieName)
@@ -34,7 +34,7 @@ class LoginController(tornado.web.RequestHandler):
             self.set_secure_cookie('cookieName', username)
             self.write("用户{user}登录成功！\n3秒后跳转到首页".format(user=result['username']))
 
-class RegisterController(Controller):
+class register(Controller):
     def get(self):
         if self.get_secure_cookie('message'):
             message=self.get_secure_cookie('message')
@@ -62,7 +62,7 @@ class RegisterController(Controller):
             else:
                 self.write("Create Error..")
 
-class LogoutController(Controller):
+class logout(Controller):
     def get(self):
         self.clear_cookie('username')
         self.success("Logout success", '/login')

@@ -1,0 +1,16 @@
+{% extends "../base.html" %}
+
+{% block content %}
+<h2>{{article['title']}}</h2>
+<hr />
+<small><i>Created_at:{{article['created_at']}} | Author:{{article['author']}} | Visit:{{article['visit']}}</i></small>
+
+<div class='artcle-index'>
+    {{article['content']}}
+</div>
+{% end %}
+
+{% block footer %}
+<br />
+<div class=""><a href="/">Return Index</a></div>
+{%end%}
