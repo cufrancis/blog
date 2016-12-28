@@ -44,6 +44,7 @@ class Model(object):
         result = self.findAll(conditions, sort, fields, '1')
 
         dump("Model==find")
+        print(result)
 
         # print(help(self._db._val_escape))
 

@@ -41,7 +41,7 @@ Config = dict(
     ),
 
     session_secret = "3cdcb1f00803b6e78ab50b466a40b9977db396840c28307f428b25e2277f1bcc",
-    session_timeout = 3600,# session 超时时间，单位秒
+    session_timeout = 60,# session 超时时间，单位秒
     store_options = {
         'redis_host': 'localhost',
         'redis_port': 6379,

@@ -18,9 +18,10 @@ class index(BaseController):
         article_db = Article()
         articles = article_db.findAll()
 
+        # self.set_session("user")
+        # self.get_session('user')
+
         # 新增文章时使用，查询sulg
         # ss = baiduTranslate()
         # print(stReplace(' ', '-', ss.translate("我爱你 宝贝", 'zh', 'en')))
-
-
         self.render('index.html', articles=articles)

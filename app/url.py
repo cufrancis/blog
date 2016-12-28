@@ -21,6 +21,8 @@ url = [
     (r'/register', User.register),
     (r'/logout', User.logout),
 
-    (r'/article/(.*)', Article.index),
-    (r'/admin', Admin.index)
+    (r'/article/show/(.*)', Article.index),
+    (r'/admin', Admin.index),
+    (r'/admin/article', Admin.article),
+    (r'/article/edit/(.*)', Article.edit),
 ]

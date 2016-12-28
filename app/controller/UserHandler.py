@@ -29,16 +29,20 @@ class login(BaseController):
         user_db = User()
         result = user_db.find(dict(username=username, password=password))
         print(result)
-        if result == False:
-            self.write("登录错误")
-        else:
+        if isinstance(result, dict) == True:
             self.session['user'] = ''
             # self.set_secure_cookie('user', result)
             self.set_secure_cookie('username', username)
             self.set_secure_cookie('cookieName', username)
             self.session['user'] = result
             self.session.save()
-            self.write("用户{user}登录成功！\n3秒后跳转到首页".format(user=result['username']))
+            # self.write("用户{user}登录成功！\n3秒后跳转到首页".format(user=result['username']))
+            self.write(result)
+        else: # 登录失败
+            # self.write("登录失败")
+            # self.write("登录失败")
+            pass
+
 
 class register(BaseController):
     def get(self):
@@ -72,4 +76,4 @@ class logout(BaseController):
     def get(self):
         self.clear_cookie('username')
         self.session['user'] = ''
-        self.success("Logout success", '/login')
+        self.success("/", '退出成功')
